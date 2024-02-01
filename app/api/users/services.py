@@ -1,12 +1,13 @@
+from fastapi import Depends
 from pydantic import conint
 from sqlalchemy.exc import IntegrityError
 
 from app.api.auth.utils import pwd_context
 from app.api.common.services import BaseService
 from app.api.common.utils import PaginationDep
-from app.api.users.exceptions import http_data_conflict_exception, http_user_not_found_exception
+from app.api.users.exceptions import http_data_conflict_exception
 from app.api.users.repository import UserRepository
-from app.api.users.schemas import UserChangePasswordRequest, UserCreateSchemas, UserUpdateSchemas
+from app.api.users.schemas import UserChangePasswordRequest, UserCreateSchemas, UserQueryParams, UserUpdateSchemas
 from app.database import SessionDep
 
 
@@ -31,10 +32,7 @@ class UserService(BaseService, GeneratePasswordService):
 
     @classmethod
     async def get(cls, user_id: conint(gt=0), session: SessionDep):
-        user = await super().get(user_id, session)
-        if user is None:
-            raise http_user_not_found_exception
-        return user
+        return await super().get(user_id, session)
 
     @classmethod
     async def get_many(
@@ -46,16 +44,25 @@ class UserService(BaseService, GeneratePasswordService):
         return await super().get_many(pagination, session)
 
     @classmethod
+    async def get_many_query(
+        cls,
+        session: SessionDep,
+        pagination: PaginationDep,
+        query_params_user: UserQueryParams = Depends(UserQueryParams),
+    ):
+        return await super().get_many_query(
+            session,
+            pagination,
+            query_params_user,
+        )
+
+    @classmethod
     async def edit(
         cls,
         user_id: conint(gt=0),
         data: UserUpdateSchemas,
         session: SessionDep,
     ):
-        user = await super().get(user_id, session)
-        if user is None:
-            raise http_user_not_found_exception
-
         try:
             user_update = await super().edit(user_id, data, session)
         except IntegrityError:
@@ -65,10 +72,6 @@ class UserService(BaseService, GeneratePasswordService):
 
     @classmethod
     async def delete(cls, user_id: conint(gt=0), session: SessionDep):
-        user = await super().get(user_id, session)
-        if user is None:
-            raise http_user_not_found_exception
-
         return await super().delete(user_id, session)
 
     @classmethod

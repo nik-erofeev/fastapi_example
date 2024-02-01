@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from app.api.users.schemas import UserResponseSchemas
+from app.api.users.schemas import UserDeleteResponseSchemas, UserResponseSchemas
 from app.api.users.services import UserService
 
 
@@ -15,7 +15,7 @@ router = APIRouter(
     status_code=status.HTTP_201_CREATED,
     response_model=UserResponseSchemas,
 )
-async def create(user: UserService.create_dep):
+async def create_user(user: UserService.create_dep):
     return user
 
 
@@ -25,7 +25,7 @@ async def create(user: UserService.create_dep):
     response_model=list[UserResponseSchemas],
     # dependencies=[Depends(get_current_user)],
 )
-async def get_all(user: UserService.get_many_dep):
+async def get_many_users(user: UserService.get_many_query_dep):
     return user
 
 
@@ -34,7 +34,7 @@ async def get_all(user: UserService.get_many_dep):
     status_code=status.HTTP_200_OK,
     response_model=UserResponseSchemas,
 )
-async def get(user: UserService.get_dep):
+async def get_user(user: UserService.get_dep):
     return user
 
 
@@ -43,16 +43,16 @@ async def get(user: UserService.get_dep):
     status_code=status.HTTP_200_OK,
     response_model=UserResponseSchemas,
 )
-async def patch(user: UserService.edit_dep):
+async def edit_user(user: UserService.edit_dep):
     return user
 
 
 @router.delete(
     "/{user_id}",
     status_code=status.HTTP_200_OK,
-    response_model=UserResponseSchemas,
+    response_model=UserDeleteResponseSchemas,
 )
-async def delete(user: UserService.delete_dep):
+async def delete_user(user: UserService.delete_dep):
     return user
 
 

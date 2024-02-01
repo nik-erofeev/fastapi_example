@@ -21,7 +21,17 @@ class UserResponseSchemas(UserBaseSchemas, BaseResponseModel):
     id: int
 
 
+class UserDeleteResponseSchemas(UserBaseSchemas, BaseResponseModel):
+    id: int
+    is_deleted: bool
+
+
 class UserUpdateSchemas(BaseModel):
+    email: EmailStr | None = None
+    username: str | None = None
+
+
+class UserQueryParams(BaseModel):
     email: EmailStr | None = None
     username: str | None = None
 
