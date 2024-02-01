@@ -10,3 +10,4 @@ class Users(models.IdMixin, Base):
 
     email: Mapped[str] = mapped_column(String(100), nullable=False)
     hashed_password: Mapped[str] = mapped_column(String(250), nullable=False)
+    is_deleted: Mapped[bool] = mapped_column(default=False)
