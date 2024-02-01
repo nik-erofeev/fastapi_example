@@ -14,6 +14,10 @@ async-timeout==4.0.3
     # via asyncpg
 asyncpg==0.29.0
     # via -r requirements.in
+bcrypt==4.0.1
+    # via
+    #   -r requirements.in
+    #   passlib
 build==1.0.3
     # via poetry
 cachecontrol[filecache]==0.13.1
@@ -79,6 +83,8 @@ packaging==23.2
     # via
     #   build
     #   poetry
+passlib[bcrypt]==1.7.4
+    # via -r requirements.in
 pexpect==4.9.0
     # via poetry
 pkginfo==1.9.6

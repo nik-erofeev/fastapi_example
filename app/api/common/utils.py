@@ -49,9 +49,7 @@ def set_pagination_headers(model: type[Base]) -> params.Depends:
                 page=pagination.page - 1,
             )
 
-        link_header = ", ".join(
-            f'<{url}>; rel="{rel}"' for rel, url in paginator.items()
-        )
+        link_header = ", ".join(f'<{url}>; rel="{rel}"' for rel, url in paginator.items())
 
         response.headers["Link"] = link_header
 

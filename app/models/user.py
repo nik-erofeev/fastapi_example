@@ -5,9 +5,9 @@ from app import models
 from app.database import Base
 
 
-class Users(models.IdMixin, Base):
+class User(models.IdMixin, Base):
     __tablename__ = "users"
 
-    email: Mapped[str] = mapped_column(String(100), nullable=False)
-    hashed_password: Mapped[str] = mapped_column(String(250), nullable=False)
+    email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(String(250), nullable=False)
     is_deleted: Mapped[bool] = mapped_column(default=False)
