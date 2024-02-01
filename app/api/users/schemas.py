@@ -10,6 +10,7 @@ class BaseResponseModel(BaseModel):
 
 class UserBaseSchemas(BaseModel):
     email: EmailStr
+    username: str
 
 
 class UserCreateSchemas(UserBaseSchemas):
@@ -22,6 +23,7 @@ class UserResponseSchemas(UserBaseSchemas, BaseResponseModel):
 
 class UserUpdateSchemas(BaseModel):
     email: EmailStr | None = None
+    username: str | None = None
 
 
 class UserChangePasswordRequest(BaseModel):

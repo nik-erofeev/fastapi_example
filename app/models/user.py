@@ -9,5 +9,6 @@ class User(models.IdMixin, Base):
     __tablename__ = "users"
 
     email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
+    username: Mapped[str] = mapped_column(String(30), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(250), nullable=False)
     is_deleted: Mapped[bool] = mapped_column(default=False)
