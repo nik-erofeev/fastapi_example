@@ -3,14 +3,17 @@
 from fastapi import APIRouter
 
 from app.api.auth.router import router as auth_router
+from app.api.products.router import router as products_router
 from app.api.users.router import router as user_router
+from app.config import settings
 
 
-router = APIRouter(prefix="/api/v1")
+router = APIRouter(prefix=settings.api_v1_prefix)
 
 routers = (
     user_router,
     auth_router,
+    products_router,
 )
 
 

@@ -6,6 +6,7 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
+    api_v1_prefix: str = "/api/v1"
     SERVER_HOST: str = "127.0.0.1"
     SERVER_PORT: int = 8000
     DEBUG: bool = True

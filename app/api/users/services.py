@@ -46,7 +46,12 @@ class UserService(BaseService, GeneratePasswordService):
         return await super().get_many(pagination, session)
 
     @classmethod
-    async def edit(cls, user_id: conint(gt=0), data: UserUpdateSchemas, session: SessionDep):
+    async def edit(
+        cls,
+        user_id: conint(gt=0),
+        data: UserUpdateSchemas,
+        session: SessionDep,
+    ):
         user = await super().get(user_id, session)
         if user is None:
             raise http_user_not_found_exception

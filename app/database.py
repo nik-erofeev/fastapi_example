@@ -5,7 +5,7 @@ from typing import Annotated
 
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession, create_async_engine
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, declared_attr
 
 from app.config import settings
 
@@ -25,6 +25,12 @@ async_session = async_sessionmaker(
 
 class Base(DeclarativeBase):
     """Базовая модель"""
+
+    __abstract__ = True
+
+    @declared_attr.directive
+    def __tablename__(cls) -> str:
+        return f"{cls.__name__.lower()}s"
 
     def __repr__(self):
         """
