@@ -28,3 +28,7 @@ class UserUpdateSchemas(BaseModel):
 
 class UserChangePasswordRequest(BaseModel):
     new_password: constr(max_length=256)
+
+
+class UserByUsernameRequest(BaseModel):
+    username: str
