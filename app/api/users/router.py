@@ -23,6 +23,7 @@ async def create(user: UserService.create_dep):
     "/",
     status_code=status.HTTP_200_OK,
     response_model=list[UserResponseSchemas],
+    # dependencies=[Depends(get_current_user)],
 )
 async def get_all(user: UserService.get_many_dep):
     return user

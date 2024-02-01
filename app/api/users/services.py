@@ -37,7 +37,12 @@ class UserService(BaseService, GeneratePasswordService):
         return user
 
     @classmethod
-    async def get_many(cls, pagination: PaginationDep, session: SessionDep):
+    async def get_many(
+        cls,
+        pagination: PaginationDep,
+        session: SessionDep,
+        # current_user=Depends(get_current_user),
+    ):
         return await super().get_many(pagination, session)
 
     @classmethod
