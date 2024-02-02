@@ -24,7 +24,7 @@ async def create_product(product: ProductService.create_dep):
     status_code=status.HTTP_200_OK,
     response_model=list[ProductResponseSchemas],
 )
-async def get_all(product: ProductService.get_many_dep):
+async def get_many_users(product: ProductService.get_many_query_dep):
     return product
 
 
@@ -33,7 +33,7 @@ async def get_all(product: ProductService.get_many_dep):
     status_code=status.HTTP_200_OK,
     response_model=ProductResponseSchemas,
 )
-async def get(product: ProductService.get_dep):
+async def get_product(product: ProductService.get_dep):
     return product
 
 
@@ -42,7 +42,7 @@ async def get(product: ProductService.get_dep):
     status_code=status.HTTP_200_OK,
     response_model=ProductResponseSchemas,
 )
-async def patch(product: ProductService.edit_dep):
+async def edit_product(product: ProductService.edit_dep):
     return product
 
 
@@ -51,5 +51,5 @@ async def patch(product: ProductService.edit_dep):
     status_code=status.HTTP_200_OK,
     response_model=ProductResponseSchemas,
 )
-async def delete(product: ProductService.delete_dep):
+async def delete_product(product: ProductService.delete_dep):
     return product

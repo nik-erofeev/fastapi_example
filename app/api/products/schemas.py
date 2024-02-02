@@ -17,6 +17,12 @@ class ProductUpdateSchemas(BaseModel):
     price: int | None = None
 
 
+class ProductQueryParams(BaseModel):
+    name: str | None = None
+    description: str | None = None
+    price: int | None = None
+
+
 class ProductResponseSchemas(ProductBaseSchemas):
     id: int
 
