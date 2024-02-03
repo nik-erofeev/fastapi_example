@@ -14,3 +14,5 @@ class User(models.IdMixin, Base):
     is_deleted: Mapped[bool] = mapped_column(default=False)
 
     posts: Mapped[list["models.post.Post"]] = relationship(back_populates="user")
+
+    profile: Mapped["models.profile.Profile"] = relationship(back_populates="user")
