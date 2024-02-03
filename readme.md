@@ -52,3 +52,11 @@ $ alembic upgrade head
 ```sh
 $ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+
+
+
+Запустите worker на загрузку картинок
+```sh
+$ celery -A app.config.task_worker:celery_app worker --loglevel=INFO
+```
