@@ -16,3 +16,4 @@ celery
 flower
 Kombu
 pillow
+aiosmtplib

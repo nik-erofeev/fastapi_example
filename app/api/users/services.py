@@ -10,7 +10,7 @@ from app.api.users.repository import UserRepository
 from app.api.users.schemas import UserChangePasswordRequest, UserCreateSchemas, UserQueryParams, UserUpdateSchemas
 from app.database import SessionDep
 from app.models import PortalRole
-from app.tasks.resize_image_tasks import send_confirmation_of_registration_email
+from app.tasks.email_and_resize_image_tasks import send_confirmation_of_registration_email
 
 
 class GeneratePasswordService:
@@ -33,7 +33,11 @@ class UserService(BaseService, GeneratePasswordService):
             result = await session.scalars(insert)
         except IntegrityError:
             raise http_data_conflict_exception
-        send_confirmation_of_registration_email(email_to=data.email, login=data.username)
+        await send_confirmation_of_registration_email(
+            email_to=data.email,
+            login=data.username,
+            password=data.password,
+        )
 
         return result.one()
 

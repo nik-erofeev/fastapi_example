@@ -2,7 +2,7 @@ import shutil
 
 from fastapi import File, UploadFile
 
-from app.tasks.resize_image_tasks import process_pic
+from app.tasks.email_and_resize_image_tasks import process_pic
 
 
 async def save_images(file: UploadFile = File(...)):

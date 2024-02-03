@@ -4,6 +4,8 @@
 #
 #    pip-compile requirements.in
 #
+aiosmtplib==3.0.1
+    # via -r requirements.in
 alembic==1.13.1
     # via -r requirements.in
 amqp==5.2.0

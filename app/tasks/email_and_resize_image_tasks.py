@@ -1,11 +1,11 @@
-import smtplib
 from pathlib import Path
 
 from PIL import Image
 from pydantic import EmailStr
 
 from app.config import celery_app, settings
-from app.tasks.email_templates import create_register_template
+from app.notifications.email_notification import email_notification
+from app.notifications.templates import send_password_template
 
 
 @celery_app.task
@@ -24,15 +24,16 @@ def process_pic(
     im_resized_200_100.save(f"app/static/images/res_200_100{im_path.name}")
 
 
-@celery_app.task
-def send_confirmation_of_registration_email(email_to: EmailStr, login: str):
+@celery_app.task(name="send_password_registration")
+async def send_confirmation_of_registration_email(email_to: EmailStr, login: str, password: str):
     # Todo замениnm email_to - email_to_mock
     # заменили чтобы самому себе отправить для теста
     email_to_mock = settings.SMTP_USER
     #
-    msg_content = create_register_template(email_to_mock, login)
+    msg_content = send_password_template(login=login, password=password)
 
-    with smtplib.SMTP_SSL(settings.SMTP_HOST, settings.SMTP_PORT) as server:
-        server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-
-        server.send_message(msg_content)
+    await email_notification.send_notification(
+        body=msg_content["body"],
+        header=msg_content["header"],
+        receivers=[email_to_mock],
+    )
