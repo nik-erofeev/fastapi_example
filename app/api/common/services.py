@@ -184,6 +184,8 @@ class DependableBaseService(AbstractBaseService):
         if isinstance(obj, Mapping):
             return obj[cls.dependency_field.name]
 
+        return getattr(obj, cls.dependency_field.name)
+
     @classmethod
     async def _create(cls, data: BaseModel, dep, session: SessionDep):
         data = data.model_dump()
