@@ -20,3 +20,21 @@ class User(models.IdMixin, Base):
     posts: Mapped[list["models.post.Post"]] = relationship(back_populates="user")
 
     profile: Mapped["models.profile.Profile"] = relationship(back_populates="user")
+
+    @property
+    def is_superadmin(self) -> bool:
+        return models.PortalRole.SUPERADMIN in self.roles
+
+    @property
+    def is_admin(self) -> bool:
+        return models.PortalRole.ADMIN in self.roles
+
+    def add_admin_privileges_to_model(self):
+        if not self.is_admin:
+            self.roles = models.PortalRole.ADMIN
+        return self.roles
+
+    def remove_admin_privileges_from_model(self):
+        if self.is_admin:
+            self.roles = models.PortalRole.USER
+        return self.roles
