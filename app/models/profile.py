@@ -11,4 +11,4 @@ class Profile(models.IdMixin, Base):
     bio: Mapped[str | None]
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), unique=True)
-    user: Mapped["models.user.User"] = relationship(back_populates="profiles")
+    user: Mapped["models.user.User"] = relationship(back_populates="profile")
