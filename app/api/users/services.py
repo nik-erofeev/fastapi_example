@@ -9,6 +9,7 @@ from app.api.users.exceptions import http_data_conflict_exception
 from app.api.users.repository import UserRepository
 from app.api.users.schemas import UserChangePasswordRequest, UserCreateSchemas, UserQueryParams, UserUpdateSchemas
 from app.database import SessionDep
+from app.models import PortalRole
 
 
 class GeneratePasswordService:
@@ -23,12 +24,15 @@ class UserService(BaseService, GeneratePasswordService):
     @classmethod
     async def create(cls, data: UserCreateSchemas, session: SessionDep):
         data.password = cls.hash_password(data.password)
+        user_role = data.model_dump()
+        user_role["roles"] = PortalRole.USER
 
         try:
-            user = await super().create(data, session)
+            insert = cls.repository.insert(user_role)
+            result = await session.scalars(insert)
         except IntegrityError:
             raise http_data_conflict_exception
-        return user
+        return result.one()
 
     @classmethod
     async def get(cls, user_id: conint(gt=0), session: SessionDep):

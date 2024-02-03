@@ -1,4 +1,4 @@
-from sqlalchemy import String
+from sqlalchemy import Enum, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app import models
@@ -12,6 +12,10 @@ class User(models.IdMixin, Base):
     username: Mapped[str] = mapped_column(String(30), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(250), nullable=False)
     is_deleted: Mapped[bool] = mapped_column(default=False)
+    roles: Mapped[models.PortalRole] = mapped_column(
+        Enum(models.PortalRole),
+        default=models.PortalRole.USER,
+    )
 
     posts: Mapped[list["models.post.Post"]] = relationship(back_populates="user")
 

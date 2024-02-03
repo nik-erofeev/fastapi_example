@@ -1,3 +1,5 @@
+import enum
+
 from pydantic import BaseModel, constr, EmailStr
 
 
@@ -18,6 +20,7 @@ class UserCreateSchemas(UserBaseSchemas):
 
 
 class UserResponseSchemas(UserBaseSchemas, BaseResponseModel):
+    roles: enum.StrEnum
     id: int
 
 
