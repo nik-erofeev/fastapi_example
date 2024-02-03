@@ -1,6 +1,7 @@
 from fastapi import Depends
 from pydantic import conint
 from sqlalchemy.exc import IntegrityError
+from fastapi import BackgroundTasks
 
 from app.api.auth.utils import pwd_context
 from app.api.common.services import BaseService
@@ -23,7 +24,7 @@ class UserService(BaseService, GeneratePasswordService):
     repository = UserRepository
 
     @classmethod
-    async def create(cls, data: UserCreateSchemas, session: SessionDep):
+    async def create(cls, data: UserCreateSchemas, session: SessionDep, background_task: BackgroundTasks):
         data.password = cls.hash_password(data.password)
         user_role = data.model_dump()
         user_role["roles"] = PortalRole.USER
@@ -33,11 +34,12 @@ class UserService(BaseService, GeneratePasswordService):
             result = await session.scalars(insert)
         except IntegrityError:
             raise http_data_conflict_exception
-        await send_confirmation_of_registration_email(
-            email_to=data.email,
-            login=data.username,
-            password=data.password,
-        )
+        # await send_confirmation_of_registration_email(
+        #     email_to=data.email,
+        #     login=data.username,
+        #     password=data.password,
+        # )
+        background_task.add_task(send_confirmation_of_registration_email, data.email, data.username, data.password)
 
         return result.one()
 

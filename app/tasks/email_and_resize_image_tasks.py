@@ -24,7 +24,7 @@ def process_pic(
     im_resized_200_100.save(f"app/static/images/res_200_100{im_path.name}")
 
 
-@celery_app.task(name="send_password_registration")
+# @celery_app.task(name="send_password_registration")
 async def send_confirmation_of_registration_email(email_to: EmailStr, login: str, password: str):
     # Todo замениnm email_to - email_to_mock
     # заменили чтобы самому себе отправить для теста
@@ -35,5 +35,5 @@ async def send_confirmation_of_registration_email(email_to: EmailStr, login: str
     await email_notification.send_notification(
         body=msg_content["body"],
         header=msg_content["header"],
-        receivers=[email_to_mock],
+        receivers=[email_to],
     )
