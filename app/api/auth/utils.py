@@ -115,6 +115,7 @@ async def get_current_user(
         )
 
         username: str = payload.get("sub")
+
         if username is None:
             raise http_credentials_exception
 

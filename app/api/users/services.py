@@ -75,7 +75,11 @@ class UserService(BaseService, GeneratePasswordService):
         return user_update
 
     @classmethod
-    async def delete(cls, user_id: conint(gt=0), session: SessionDep):
+    async def delete(
+        cls,
+        user_id: conint(gt=0),
+        session: SessionDep,
+    ):
         return await super().delete(user_id, session)
 
     @classmethod
