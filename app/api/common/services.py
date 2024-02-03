@@ -88,18 +88,18 @@ class BaseService(AbstractBaseService):
         data = data.model_dump()
         insert = cls.repository.insert(data)
 
-        result = await session.scalar(insert)
+        result = await session.scalars(insert)
         await session.flush()
 
-        return result
+        return result.one()
 
     @classmethod
     async def _get(cls, obj_id: int, session: SessionDep):
         select = cls.repository.select(obj_id)
 
-        result = await session.scalar(select)
+        result = await session.scalars(select)
 
-        return result
+        return result.one()
 
     @classmethod
     async def _get_many(cls, pagination: PaginationDep, session: SessionDep):
@@ -134,21 +134,21 @@ class BaseService(AbstractBaseService):
             data.model_dump(exclude_unset=True),
         )
 
-        result = await session.scalar(update)
+        result = await session.scalars(update)
 
         await session.flush()
 
-        return result
+        return result.one()
 
     @classmethod
     async def _delete(cls, obj_id: int, session: SessionDep):
         delete = cls.repository.delete(obj_id)
 
-        result = await session.scalar(delete)
+        result = await session.scalars(delete)
 
         await session.flush()
 
-        return result
+        return result.one()
 
     @classmethod
     async def create(cls, *args, **kwargs):
@@ -191,18 +191,18 @@ class DependableBaseService(AbstractBaseService):
         data = data.model_dump()
         insert = cls.repository.insert(data, cls._get_dep_value(dep))
 
-        result = await session.scalar(insert)
+        result = await session.scalars(insert)
         await session.flush()
 
-        return result
+        return result.one()
 
     @classmethod
     async def _get(cls, obj_id: int, dep, session: SessionDep):
         select = cls.repository.select(obj_id, cls._get_dep_value(dep))
 
-        result = await session.scalar(select)
+        result = await session.scalars(select)
 
-        return result
+        return result.one()
 
     @classmethod
     async def _get_many(cls, pagination: PaginationDep, dep, session: SessionDep):
@@ -221,21 +221,21 @@ class DependableBaseService(AbstractBaseService):
             cls._get_dep_value(dep),
         )
 
-        result = await session.scalar(update)
+        result = await session.scalars(update)
 
         await session.flush()
 
-        return result
+        return result.one()
 
     @classmethod
     async def _delete(cls, obj_id: int, dep, session: SessionDep):
         delete = cls.repository.delete(obj_id, cls._get_dep_value(dep))
 
-        result = await session.scalar(delete)
+        result = await session.scalars(delete)
 
         await session.flush()
 
-        return result
+        return result.one()
 
     @classmethod
     async def create(cls, *args, **kwargs):
