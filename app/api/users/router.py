@@ -1,5 +1,6 @@
 from fastapi import APIRouter, status
 
+from app.api.posts.router import router as posts_router
 from app.api.profiles.router import router as profile_router
 from app.api.users.schemas import UserDeleteResponseSchemas, UserResponseSchemas
 from app.api.users.services import UserService
@@ -10,6 +11,7 @@ router = APIRouter(
     tags=["users"],
 )
 router.include_router(profile_router)
+router.include_router(posts_router)
 
 
 @router.post(
