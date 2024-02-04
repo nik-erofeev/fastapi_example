@@ -33,10 +33,10 @@ balanced_wrapping = true
 skip = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*',]
 
 
-[tool.black]
-line-length = 120
-skip-string-normalization = true
-exclude = ['.git', '__pycache__', '*.yml.enc']
+#[tool.black]
+#line-length = 120
+#skip-string-normalization = true
+#exclude = ['.git', '__pycache__', '*.yml.enc']
 
 [tool.flake8]
 max-line-length = 120
