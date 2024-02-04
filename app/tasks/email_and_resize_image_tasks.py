@@ -25,7 +25,11 @@ def process_pic(
 
 
 @celery_app.task(name="send_password_registration")
-async def send_confirmation_of_registration_email(email_to: EmailStr, login: str, password: str):
+async def send_confirmation_of_registration_email(
+    email_to: EmailStr,
+    login: str,
+    password: str,
+):
     # Todo замениnm email_to - email_to_mock
     # заменили чтобы самому себе отправить для теста
     email_to_mock = settings.SMTP_USER

@@ -17,9 +17,9 @@ class EmailNotification(BaseNotification):
         """Создание сообщения для отправки по email"""
 
         msg = MIMEText(body)
-        msg['Subject'] = header
-        msg['From'] = settings.SMTP_USER
-        msg['To'] = ','.join(receivers)
+        msg["Subject"] = header
+        msg["From"] = settings.SMTP_USER
+        msg["To"] = ",".join(receivers)
 
         return msg.as_string()
 
