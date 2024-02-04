@@ -1,4 +1,7 @@
+import asyncio
+
 from fastapi import APIRouter, Depends, status
+from fastapi_cache.decorator import cache
 
 from app.api.auth.utils import get_current_user
 from app.api.posts.router import router as posts_router
@@ -33,7 +36,9 @@ async def create_user(user: UserService.create_dep):
         Depends(get_current_user),
     ],
 )
+@cache(expire=30)
 async def get_many_users(user: UserService.get_many_query_dep):
+    await asyncio.sleep(3)
     return user
 
 
