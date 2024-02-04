@@ -54,7 +54,7 @@ $ alembic upgrade head
 
 Запустите приложение с помощью [uvicorn](https://www.uvicorn.org/):
 ```sh
-$ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 
@@ -62,5 +62,11 @@ $ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 Запустите worker
 ```sh
-$ celery -A app.config.task_worker:celery_app worker --loglevel=INFO
+celery -A app.config.task_worker:celery_app worker --loglevel=INFO
+```
+
+
+запуск Flower
+```sh
+celery -A app.config.task_worker:celery_app flower
 ```

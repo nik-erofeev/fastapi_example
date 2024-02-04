@@ -1,12 +1,8 @@
 from fastapi import FastAPI
 from fastapi.exceptions import ResponseValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
-from redis import asyncio as aioredis
 from sqlalchemy.exc import NoResultFound
 
-from app.config import settings
 from app.exceptions import sqlalchemy_not_found_exception_handler
 from app.router import router
 
@@ -47,6 +43,11 @@ app.add_middleware(
 # при запуске приложения: Создается объект Redis / Инициализирует FastAPICache с бэкендом Redis и указывает префикс "cache". # noqa
 # это используется для настройки кэширования с помощью Redis при старте вашего FastAPI-приложения.
 
+
+# from fastapi_cache import FastAPICache
+# from fastapi_cache.backends.redis import RedisBackend
+# from redis import asyncio as aioredis
+# from app.config import settings
 
 # @app.on_event("startup")
 # def startup():

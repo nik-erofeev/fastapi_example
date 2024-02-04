@@ -11,4 +11,4 @@ router = APIRouter(
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def upload_images(image: File = Depends(save_images)):
-    return image
+    return image.filename

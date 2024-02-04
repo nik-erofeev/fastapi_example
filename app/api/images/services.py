@@ -12,4 +12,4 @@ async def save_images(file: UploadFile = File(...)):
 
     process_pic.delay(im_path)
 
-    return {"фото загружено": file.filename}
+    return file

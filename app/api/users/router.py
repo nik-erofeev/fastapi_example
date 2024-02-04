@@ -1,7 +1,4 @@
-import asyncio
-
 from fastapi import APIRouter, Depends, status
-from fastapi_cache.decorator import cache
 
 from app.api.auth.utils import get_current_user
 from app.api.posts.router import router as posts_router
@@ -9,6 +6,9 @@ from app.api.profiles.router import router as profile_router
 from app.api.users.dependencies import check_user_permissions_dependency
 from app.api.users.schemas import UserDeleteResponseSchemas, UserResponseSchemas
 from app.api.users.services import UserService
+
+
+# from fastapi_cache.decorator import cache
 
 
 router = APIRouter(

@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from PIL import Image
-from pydantic import EmailStr
 
 from app.config import celery_app, settings
 from app.notifications.email_notification import email_notification
@@ -26,7 +25,7 @@ def process_pic(
 
 @celery_app.task(name="send_password_registration")
 async def send_confirmation_of_registration_email(
-    email_to: EmailStr,
+    email_to: str,
     login: str,
     password: str,
 ):
@@ -41,3 +40,5 @@ async def send_confirmation_of_registration_email(
         header=msg_content["header"],
         receivers=[email_to_mock],
     )
+
+    return None
