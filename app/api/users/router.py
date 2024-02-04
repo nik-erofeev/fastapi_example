@@ -36,9 +36,9 @@ async def create_user(user: UserService.create_dep):
         Depends(get_current_user),
     ],
 )
-@cache(expire=30)
+# @cache(expire=30)
 async def get_many_users(user: UserService.get_many_query_dep):
-    await asyncio.sleep(3)
+    # await asyncio.sleep(3)
     return user
 
 

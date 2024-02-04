@@ -48,12 +48,12 @@ app.add_middleware(
 # это используется для настройки кэширования с помощью Redis при старте вашего FastAPI-приложения.
 
 
-@app.on_event("startup")
-def startup():
-    redis = aioredis.from_url(
-        f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}",
-        encoding="utf8",
-        decode_response=True,
-    )
-
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+# @app.on_event("startup")
+# def startup():
+#     redis = aioredis.from_url(
+#         f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}",
+#         encoding="utf8",
+#         decode_response=True,
+#     )
+#
+#     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
