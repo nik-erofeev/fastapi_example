@@ -29,8 +29,8 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
-    CELERY_BROKER_URL: str = "redis://localhost:6379"
-    CELERY_RESULT_BACKEND: str = "redis://localhost:6379"
+    CELERY_BROKER_URL: str
+    CELERY_RESULT_BACKEND: str
 
     REDIS_HOST: str
     REDIS_PORT: int
@@ -39,6 +39,8 @@ class Settings(BaseSettings):
     SMTP_PORT: int | None = None
     SMTP_USER: str | None = None
     SMTP_PASSWORD: str | None = None
+
+    SENTRY_URL: str
 
     @property
     def database_url(self) -> str:

@@ -1,8 +1,11 @@
+import sentry_sdk
 from fastapi import FastAPI
 from fastapi.exceptions import ResponseValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 from sqlalchemy.exc import NoResultFound
 
+from app.config import settings
 from app.exceptions import sqlalchemy_not_found_exception_handler
 from app.router import router
 
@@ -39,6 +42,19 @@ app.add_middleware(
     ],
 )
 
+
+sentry_sdk.init(
+    dsn=settings.SENTRY_URL,
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
+
+
+instrumentator = Instrumentator(
+    should_group_status_codes=False,
+    excluded_handlers=["/metric"],
+)
+instrumentator.instrument(app).expose(app)
 
 # при запуске приложения: Создается объект Redis / Инициализирует FastAPICache с бэкендом Redis и указывает префикс "cache". # noqa
 # это используется для настройки кэширования с помощью Redis при старте вашего FastAPI-приложения.

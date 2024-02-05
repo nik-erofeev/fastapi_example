@@ -29,7 +29,9 @@ bcrypt==4.0.1
 billiard==4.2.0
     # via celery
 build==1.0.3
-    # via poetry
+    # via
+    #   pip-tools
+    #   poetry
 cachecontrol[filecache]==0.13.1
     # via
     #   cachecontrol
@@ -39,9 +41,13 @@ celery==5.3.6
     #   -r requirements.in
     #   flower
 certifi==2023.11.17
-    # via requests
+    # via
+    #   requests
+    #   sentry-sdk
 cffi==1.16.0
     # via xattr
+cfgv==3.4.0
+    # via pre-commit
 charset-normalizer==3.3.2
     # via requests
 cleo==2.1.0
@@ -52,6 +58,7 @@ click==8.1.7
     #   click-didyoumean
     #   click-plugins
     #   click-repl
+    #   pip-tools
     #   uvicorn
 click-didyoumean==0.3.0
     # via celery
@@ -77,6 +84,8 @@ fastapi==0.109.0
     # via
     #   -r requirements.in
     #   fastapi-cache2
+    #   prometheus-fastapi-instrumentator
+    #   sentry-sdk
 fastapi-cache2[redis]==0.1.8
     # via -r requirements.in
 fastjsonschema==2.19.1
@@ -89,10 +98,14 @@ flower==2.0.1
     # via -r requirements.in
 greenlet==3.0.3
     # via -r requirements.in
+gunicorn==21.2.0
+    # via -r requirements.in
 h11==0.14.0
     # via uvicorn
 humanize==4.9.0
     # via flower
+identify==2.5.33
+    # via pre-commit
 idna==3.6
     # via
     #   anyio
@@ -118,9 +131,12 @@ more-itertools==10.2.0
     # via jaraco-classes
 msgpack==1.0.7
     # via cachecontrol
+nodeenv==1.8.0
+    # via pre-commit
 packaging==23.2
     # via
     #   build
+    #   gunicorn
     #   poetry
 passlib[bcrypt]==1.7.4
     # via -r requirements.in
@@ -129,6 +145,8 @@ pendulum==3.0.0
 pexpect==4.9.0
     # via poetry
 pillow==10.2.0
+    # via -r requirements.in
+pip-tools==7.3.0
     # via -r requirements.in
 pkginfo==1.9.6
     # via poetry
@@ -146,8 +164,14 @@ poetry-core==1.8.1
     #   poetry-plugin-export
 poetry-plugin-export==1.6.0
     # via poetry
+pre-commit==3.6.0
+    # via -r requirements.in
 prometheus-client==0.19.0
-    # via flower
+    # via
+    #   flower
+    #   prometheus-fastapi-instrumentator
+prometheus-fastapi-instrumentator==6.1.0
+    # via -r requirements.in
 prompt-toolkit==3.0.43
     # via click-repl
 ptyprocess==0.7.0
@@ -184,6 +208,8 @@ python-multipart==0.0.6
     # via -r requirements.in
 pytz==2024.1
     # via flower
+pyyaml==6.0.1
+    # via pre-commit
 rapidfuzz==3.6.1
     # via cleo
 redis==5.0.1
@@ -197,6 +223,8 @@ requests-toolbelt==1.0.0
     # via poetry
 rsa==4.9
     # via python-jose
+sentry-sdk[fastapi]==1.40.0
+    # via -r requirements.in
 shellingham==1.5.4
     # via poetry
 six==1.16.0
@@ -235,6 +263,7 @@ urllib3==2.2.0
     # via
     #   dulwich
     #   requests
+    #   sentry-sdk
 uvicorn==0.27.0.post1
     # via
     #   -r requirements.in
@@ -245,10 +274,18 @@ vine==5.1.0
     #   celery
     #   kombu
 virtualenv==20.25.0
-    # via poetry
+    # via
+    #   poetry
+    #   pre-commit
 wcwidth==0.2.13
     # via prompt-toolkit
+wheel==0.42.0
+    # via pip-tools
 xattr==0.10.1
     # via poetry
 zipp==3.17.0
     # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip
+# setuptools
