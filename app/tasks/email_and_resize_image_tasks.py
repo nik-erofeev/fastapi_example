@@ -1,5 +1,6 @@
 import smtplib
 from pathlib import Path
+from time import sleep
 
 from PIL import Image
 
@@ -31,6 +32,7 @@ def send_confirmation_of_registration_email_flower(
 ):
     # Todo заменить  email_to_mock на email_to !!!!
     # заменили чтобы самому себе отправить для теста
+    sleep(10)
     email_to_mock = settings.SMTP_USER
 
     msg_content = create_register_template(email_to_mock, login, password)
