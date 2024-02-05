@@ -1,5 +1,5 @@
-from pathlib import Path
 import smtplib
+from pathlib import Path
 
 from PIL import Image
 
@@ -25,7 +25,9 @@ def process_pic(
 
 @celery_app.task(name="send_email_registration")
 def send_confirmation_of_registration_email_flower(
-    email_to: str, login: str, password: str
+    email_to: str,
+    login: str,
+    password: str,
 ):
     # Todo заменить  email_to_mock на email_to !!!!
     # заменили чтобы самому себе отправить для теста

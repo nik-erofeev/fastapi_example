@@ -2,6 +2,7 @@
 
 from fastapi import APIRouter
 
+from app.api.admin_roles.router import router as roles_router
 from app.api.auth.router import router as auth_router
 from app.api.images.router import router as images_router
 from app.api.products.router import router as products_router
@@ -16,6 +17,7 @@ routers = (
     auth_router,
     products_router,
     images_router,
+    roles_router,
 )
 
 

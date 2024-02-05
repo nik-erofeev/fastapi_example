@@ -45,3 +45,11 @@ class UserChangePasswordRequest(BaseModel):
 
 class UserByUsernameRequest(BaseModel):
     username: str
+
+
+class UpdatedUserResponseRoles(BaseModel):
+    updated_user_id: int
+
+
+class UserResponseTest(BaseModel):
+    roles: enum.StrEnum
