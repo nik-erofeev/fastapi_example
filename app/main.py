@@ -10,6 +10,13 @@ from app.exceptions import sqlalchemy_not_found_exception_handler
 from app.router import router
 
 
+sentry_sdk.init(
+    dsn=settings.SENTRY_URL,
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
+
+
 app = FastAPI(
     title="Тест проект",
     description="описание",
@@ -40,13 +47,6 @@ app.add_middleware(
         "Access-Control-Allow-Headers",
         "Access-Authorization",
     ],
-)
-
-
-sentry_sdk.init(
-    dsn=settings.SENTRY_URL,
-    traces_sample_rate=1.0,
-    profiles_sample_rate=1.0,
 )
 
 
