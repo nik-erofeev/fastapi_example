@@ -56,6 +56,12 @@ instrumentator = Instrumentator(
 )
 instrumentator.instrument(app).expose(app)
 
+# from starlette_exporter import handle_metrics
+# from starlette_exporter import PrometheusMiddleware
+#
+# app.add_middleware(PrometheusMiddleware)
+# app.add_route("/metrics", handle_metrics)
+
 # при запуске приложения: Создается объект Redis / Инициализирует FastAPICache с бэкендом Redis и указывает префикс "cache". # noqa
 # это используется для настройки кэширования с помощью Redis при старте вашего FastAPI-приложения.
 

@@ -5,7 +5,7 @@
  заменял чтобы самому себе отправить для теста
 ```
 ### Через docker-compose
-Создайте в корне приложения файл .env и определите в нем все переменные, указанные в [.env.example](./.env.example).
+Создайте в корне приложения файл .env и определите в нём все переменные, указанные в [.env.example](./.env.example).
 
 
 Соберите и запустите приложение с помощью
@@ -67,6 +67,26 @@ celery -A app.config.task_worker:celery_app worker --loglevel=INFO
 
 
 запуск Flower
+посмотреть таски на порту "http://localhost:5555"
 ```sh
 celery -A app.config.task_worker:celery_app flower
+```
+
+добавить в sentry project
+```
+https://sentry.io/issues/?project=4506698945200128
+```
+
+проверить настройки prometheus в разделе STATUS - TARGETS
+проверить что видит наше приложение должно быть(up)
+```
+http://localhost:9090/targets
+```
+
+в grafana добавить prometheus (add data source/Prometheus)
+
+
+```
+в настрйоках подключения "URL" указать "http://prometheus:9090"  -> localhost(prometheus) из docker-compose
+http://localhost:3000/datasources
 ```

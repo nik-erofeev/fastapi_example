@@ -13,7 +13,8 @@ WORKDIR /app_example
 
 # Копируем зависимости файла зависимостей и устанавливаем их
 COPY requirements.txt /app_example/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Копируем содержимое текущей директории в контейнер в директорию /app
 COPY . /app_example/

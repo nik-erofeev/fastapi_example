@@ -38,7 +38,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-#    command: bash -c "alembic upgrade heads && app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+#    command: bash -c "alembic upgrade heads && app.main:app --host 0.0.0.0 --port 8000 --reload"
     command: [ "/app_example/docker/app.sh" ]
     depends_on:
       - postgres
@@ -87,42 +87,42 @@ services:
     networks:
       - custom
 
-#  prometheus:
-#    depends_on:
-#      - fastapi_example
-#    image: prom/prometheus:v2.43.0
-#    container_name: prometheus
-#    restart: unless-stopped
-#    volumes:
-#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-#      - prometheus-data:/prometheus
-##    command:
-##      - '--config.file=/etc/prometheus/prometheus.yml'
-#    ports:
-#      - "9090:9090"
-#    networks:
-#      - custom
-#
-#  grafana:
-#    image: grafana/grafana:8.5.22
-#    container_name: grafana
-#    restart: unless-stopped
-#    volumes:
-#      - grafana-data:/var/lib/grafana
-##      - grafana-config:/etc/grafana
-#    ports:
-#      - "3000:3000"
-#    depends_on:
-#      - prometheus
-#    networks:
-#      - custom
+  prometheus:
+    depends_on:
+      - fastapi_example
+    image: prom/prometheus:v2.43.0
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+#    command:
+#      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - custom
+
+  grafana:
+    image: grafana/grafana:8.5.22
+    container_name: grafana
+    restart: always
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - grafana-config:/etc/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - custom
 
 
 
 volumes:
   postgres_storage:
   grafana-data:
-#  grafana-config:
+  grafana-config:
   prometheus-data:
 
 
