@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from pydantic import BaseModel
 
 from app.api.users.schemas import UserByUsernameRequest
@@ -6,6 +8,7 @@ from app.api.users.schemas import UserByUsernameRequest
 class TokenData(BaseModel):
     sub: str | None = None
     user_id: int | None = None
+    exp: timedelta | None = None
 
 
 class Token(BaseModel):

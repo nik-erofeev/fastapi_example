@@ -49,10 +49,11 @@ def verify_refresh_token(token: str):
 
         username: str = payload.get("sub")
         user_id = payload.get("user_id")
+        exp = payload.get("exp")
         if username is None or user_id is None:
             raise http_credentials_exception
 
-        token_data = TokenData(sub=user_id, user_id=user_id)
+        token_data = TokenData(sub=username, user_id=user_id, exp=exp)
 
     except JWTError:
         raise http_credentials_exception
@@ -73,7 +74,7 @@ def generate_tokens(user: User) -> dict:
     refresh_token = create_token(
         data={"sub": user.username, "user_id": user.id},
         expires_delta=REFRESH_TOKEN_EXPIRES,
-        secret=settings.JWT_SECRET_KEY,
+        secret=settings.REFRESH_SECRET_KEY,
     )
 
     return {

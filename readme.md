@@ -1,29 +1,29 @@
 # Установка и запуск
 Создайте в корне приложения файл **.env** и определите в нём все переменные, указанные в [.env.example](./.env.example).
 ___
-- заменить **_email_to_** на **_email_to_mock_** в файле [email_and_resize_image_tasks.py](./app/tasks/email_and_resize_image_tasks.py)  
+- заменить **_email_to_** на **_email_to_mock_** в файле [email_and_resize_image_tasks.py](./app/tasks/email_and_resize_image_tasks.py)
 Изменял, чтобы самому себе отправить на email информацию о регистрации в приложении
 ___
 
 ___
-#### Добавить и настроить sentry 
+#### Добавить и настроить sentry
 - создать и определить [SENTRY_URL](https://sentry.io/issues/?project=4506698945200128) в **_.env_**
 ___
 
 ___
 
-#### Проверить настройки [Prometheus](http://localhost:9090/targets) в разделе STATUS - TARGETS 
+#### Проверить настройки [Prometheus](http://localhost:9090/targets) в разделе STATUS - TARGETS
 - Убедиться, что Prometheus видит наше приложение должно быть **up**
 ___
 ___
 
 #### В настройках [Grafana](http://localhost:3000/datasources) добавить prometheus (add data source/Prometheus)
 
-- указать : "URL" = "http://prometheus:9090"  .  
-**prometheus** это _localhost_  из [docker-compose.yaml](./docker-compose.yaml)  
+- указать : "URL" = "http://prometheus:9090"  .
+**prometheus** это _localhost_  из [docker-compose.yaml](./docker-compose.yaml)
 
 
-- заменить **_uid_** в [grafana-dashboard.json](./grafana-dashboard.json) на свой созданный выше  
+- заменить **_uid_** в [grafana-dashboard.json](./grafana-dashboard.json) на свой созданный выше
 выгрузить конфиг [grafana-dashboard.json](./grafana-dashboard.json) или свой конфиг в дашборд
 ___
 
@@ -60,8 +60,8 @@ http://localhost:8000
 ```sh
 $ python3.11 -m venv venv
 $ source venv/bin/activate
-```  
-  
+```
+
 #### Установить зависимости:
 ```sh
 $ pip install -r requirements.txt
