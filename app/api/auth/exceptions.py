@@ -14,3 +14,13 @@ http_incorrect_username_or_password_exception = HTTPException(
     detail="Неправильный логин или пароль",
     headers={"WWW-Authenticate": "Bearer"},
 )
+
+http_expire_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Срок действия токена истек",
+)
+
+http_token_absent_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Cookie отсутствует",
+)

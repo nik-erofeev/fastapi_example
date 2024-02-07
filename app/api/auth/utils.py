@@ -1,14 +1,19 @@
 from datetime import datetime, timedelta
 from typing import Annotated
 
-from fastapi import Depends
+from fastapi import Depends, Request
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
+from jose.exceptions import ExpiredSignatureError
 from passlib.context import CryptContext
-from sqlalchemy.exc import NoResultFound
 
 from app.api.auth.constanct import ACCESS_TOKEN_EXPIRES, REFRESH_TOKEN_EXPIRES
-from app.api.auth.exceptions import http_credentials_exception, http_incorrect_username_or_password_exception
+from app.api.auth.exceptions import (
+    http_credentials_exception,
+    http_expire_exception,
+    http_incorrect_username_or_password_exception,
+    http_token_absent_exception,
+)
 from app.api.auth.schemas import TokenData
 from app.api.users.schemas import UserByUsernameRequest
 from app.api.users.utils import user_by_username
@@ -54,6 +59,9 @@ def verify_refresh_token(token: str):
             raise http_credentials_exception
 
         token_data = TokenData(sub=username, user_id=user_id, exp=exp)
+
+    except ExpiredSignatureError:
+        raise http_expire_exception
 
     except JWTError:
         raise http_credentials_exception
@@ -104,31 +112,46 @@ def refresh_tokens(refresh_data: TokenData) -> dict:
     }
 
 
-async def get_current_user(
-    token: Annotated[str, Depends(oauth2_scheme)],
-    session: SessionDep,
-):
+async def decode_token(token: str) -> UserByUsernameRequest:
     try:
         payload = jwt.decode(
             token,
             key=settings.JWT_SECRET_KEY,
             algorithms=[settings.ALGORITHM],
         )
-
         username: str = payload.get("sub")
-
         if username is None:
             raise http_credentials_exception
+        user = UserByUsernameRequest(username=username)
+        return user
 
-        user_data = UserByUsernameRequest(username=username)
-
+    except ExpiredSignatureError:
+        raise http_expire_exception
     except JWTError:
         raise http_credentials_exception
 
-    try:
-        user = await user_by_username(user_data, session)
 
-    except NoResultFound:
-        raise http_credentials_exception
+async def get_current_user(
+    token: Annotated[str, Depends(oauth2_scheme)],
+    session: SessionDep,
+) -> User:
+    username = await decode_token(token)
+    user = await user_by_username(username, session)
+    return user
 
+
+def get_token_cookie(request: Request):
+    token = request.cookies.get("access_token")
+    if not token:
+        raise http_token_absent_exception
+    return token
+
+
+async def get_current_user_from_cookie(
+    session: SessionDep,
+    token: str = Depends(get_token_cookie),
+) -> User:
+    username = await decode_token(token)
+
+    user = await user_by_username(username, session)
     return user
