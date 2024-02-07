@@ -1,10 +1,3 @@
-<h1 align="center">Привет, меня зовут  <a href="https://github.com/nik-erofeev?tab=repositories" target="_blank">Никита</a> 
-<img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
-<h3 align="center"> Я python backend developer 🇷🇺</h3>
-
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Это тестовый проект FastAPI)](https://git.io/typing-svg)
-
 # Установка и запуск
 Создайте в корне приложения файл **.env** и определите в нём все переменные, указанные в [.env.example](./.env.example).
 ___
