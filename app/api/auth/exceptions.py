@@ -1,4 +1,5 @@
 """Исключения для ресурса "Пользователи" """
+
 from fastapi import HTTPException, status
 
 

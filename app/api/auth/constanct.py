@@ -1,4 +1,5 @@
 """Константы для ресурса "Пользователи" """
+
 from datetime import timedelta
 
 from app.config import settings

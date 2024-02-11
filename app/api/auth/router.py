@@ -1,4 +1,5 @@
 """Контроллеры для ресурса "Пользователи" """
+
 from fastapi import APIRouter, Depends, Response, status
 
 from app.api.auth.schemas import Token

@@ -1,4 +1,5 @@
 """Модуль работы с Базой Данных"""
+
 # pylint: skip-file
 import contextlib
 from collections.abc import AsyncGenerator
