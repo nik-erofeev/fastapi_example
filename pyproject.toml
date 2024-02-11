@@ -30,26 +30,54 @@ combine_as_imports = true
 combine_star = true
 skip_gitignore = true
 balanced_wrapping = true
-skip = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*',  'grafana-dashboard.json', 'grafana-dashboard.json', '*/docker/*', 'prometheus.yml']
+skip = ['.git',
+    '__pycache__',
+    '*.yml.enc',
+    '*/migrations/*',
+    'grafana-dashboard.json',
+    'grafana-dashboard.json',
+    '*/docker/*',
+    'prometheus.yml',
+    '*/venv/*',
+    '*/env/*',
+]
 
 
 [tool.black]
 line-length = 120
 skip-string-normalization = true
-exclude = ['.git', '__pycache__', '*.yml.enc', 'grafana-dashboard.json', '*/docker/*', 'prometheus.yml']
+exclude = '''
+\\.git|__pycache__
+|\\.yml\\.enc
+|\\*/migrations/\\*
+|grafana-dashboard\\.json
+|\\*/docker/\\*
+|prometheus\\.yml
+|venv
+|env
+'''
 
 [tool.flake8]
 max-line-length = 120
-exclude = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json','*/docker/*', 'prometheus.yml']
+exclude = '''
+\\.git|__pycache__
+|\\.yml\\.enc
+|\\*/migrations/\\*
+|grafana-dashboard\\.json
+|\\*/docker/\\*
+|prometheus\\.yml
+|venv
+|env
+'''
+#exclude = '''
+#/(
+#    \.git
+#  | __pycache__
+#  | \.yml\.enc
+#  | \*/migrations/\*
+#  | grafana-dashboard\.json
+#  | \*/docker/\*
+#  | prometheus\.yml
+#)/
+#'''
 
-[tool.pylint.messages_control]
-disable = "C0114, C0115, C0116"
-
-[tool.pylint.format]
-max-line-length = 120
-
-[tool.pylint.report]
-output-format = "colorized"
-
-[tool.pylint.'Master']
-ignore = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json', '*/docker/*', 'prometheus.yml']
