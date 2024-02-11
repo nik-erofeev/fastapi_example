@@ -48,7 +48,6 @@ class AdminRoleService(BaseService):
         if user_for_promotion is None:
             raise http_user_not_found_exception
 
-            # todo
         updated_user_params = {
             "roles": user_for_promotion.add_admin_privileges_to_model(),
         }
@@ -92,7 +91,6 @@ class AdminRoleService(BaseService):
         if user_for_revoke_admin_privileges is None:
             raise http_user_not_found_exception
 
-        # todo
         updated_user_params = {
             "roles": user_for_revoke_admin_privileges.remove_admin_privileges_from_model(),
         }
