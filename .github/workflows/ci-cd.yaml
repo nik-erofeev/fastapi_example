@@ -13,14 +13,19 @@ jobs:
         python-version: ["3.11"]
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
+
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.11'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
+        pip install mypy
+
+    - name: Analysing the code with mypy
       run: |
-        mypy .
+        mypy --ignore-missing-imports \
+          --exclude '\.git|__pycache__|.*\.yml\.enc|.*/migrations/.*|grafana-dashboard\.json|.*/docker/.*|prometheus\.yml'
+
