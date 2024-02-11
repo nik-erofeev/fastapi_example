@@ -19,6 +19,7 @@ pillow
 aiosmtplib
 fastapi-cache2[redis]
 sentry-sdk[fastapi]
+
 pip-tools
 pre-commit
 prometheus_fastapi_instrumentator
