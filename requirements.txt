@@ -170,6 +170,7 @@ prometheus-client==0.19.0
     # via
     #   flower
     #   prometheus-fastapi-instrumentator
+    #   starlette-exporter
 prometheus-fastapi-instrumentator==6.1.0
     # via -r requirements.in
 prompt-toolkit==3.0.43
@@ -238,7 +239,11 @@ sqlalchemy==2.0.25
     #   -r requirements.in
     #   alembic
 starlette==0.35.1
-    # via fastapi
+    # via
+    #   fastapi
+    #   starlette-exporter
+starlette-exporter==0.15.1
+    # via -r requirements.in
 time-machine==2.13.0
     # via pendulum
 tomlkit==0.12.3

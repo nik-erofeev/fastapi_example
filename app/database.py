@@ -1,4 +1,5 @@
 """Модуль работы с Базой Данных"""
+# pylint: skip-file
 import contextlib
 from collections.abc import AsyncGenerator
 from typing import Annotated
@@ -29,7 +30,7 @@ class Base(DeclarativeBase):
     __abstract__ = True
 
     @declared_attr.directive
-    def __tablename__(cls) -> str:
+    def __tablename__(cls) -> str:  # pylint: disable=no-self-argument
         return f"{cls.__name__.lower()}s"
 
     def __repr__(self):

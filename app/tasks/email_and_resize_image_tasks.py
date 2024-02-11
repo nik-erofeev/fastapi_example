@@ -1,3 +1,4 @@
+# pylint: skip-file
 import smtplib
 from pathlib import Path
 from time import sleep
@@ -30,7 +31,7 @@ def send_confirmation_of_registration_email_flower(
     login: str,
     password: str,
 ):
-    # Todo заменить  email_to_mock на email_to !!!!
+    # Todo заменить  email_to_mock на email_to !!!!   # noqa pylint
     # заменили чтобы самому себе отправить для теста
     sleep(10)
     email_to_mock = settings.SMTP_USER

@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 """init
 
 Revision ID: 953e75eae9ae
