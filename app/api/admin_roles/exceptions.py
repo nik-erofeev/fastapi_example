@@ -1,5 +1,4 @@
-from fastapi import HTTPException
-from starlette import status
+from fastapi import HTTPException, status
 
 
 http_current_user_conflict_exception = HTTPException(
