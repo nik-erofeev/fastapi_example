@@ -41,3 +41,15 @@ exclude = ['.git', '__pycache__', '*.yml.enc', 'grafana-dashboard.json', '*/dock
 [tool.flake8]
 max-line-length = 120
 exclude = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json','*/docker/*', 'prometheus.yml']
+
+[tool.pylint.messages_control]
+disable = "C0114, C0115, C0116"
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.report]
+output-format = "colorized"
+
+[tool.pylint.'Master']
+ignore = ['.git', '__pycache__', '*.yml.enc', '*/migrations/*', 'grafana-dashboard.json', '*/docker/*', 'prometheus.yml']
