@@ -23,6 +23,7 @@ pip-tools
 pre-commit
 prometheus_fastapi_instrumentator
 gunicorn
+
 starlette-exporter==0.15.1
 
 mypy
